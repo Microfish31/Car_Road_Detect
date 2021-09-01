@@ -13,7 +13,7 @@ def getLineCoordinatesFromParameters(image, line_parameters):
     x2 = int((y2 - intercept) / slope)
     if x1<0 :
        x1 = 0
-    print((x1,x2,y1,y2))
+    #print((x1,x2,y1,y2))
     return np.array([x1, y1, x2, y2])
 
 def getSmoothLines(image, lines,threshold_slope):
@@ -32,7 +32,7 @@ def getSmoothLines(image, lines,threshold_slope):
             right_fit.append((slope, intercept))
     
     if len(left_fit) == 0 or len(right_fit) == 0 :
-       print("in")
+       #print("in")
        return 
 
     # axis = 0?
@@ -63,7 +63,6 @@ def mask_fun(image) :
     cv2.fillConvexPoly(stencil, polygon, (255,255,255))
 
     return cv2.bitwise_and(image, image, mask=stencil)
-    #cv2.imshow('mask', mask)
 
 
 def get_line(mask_image) :
@@ -109,9 +108,6 @@ while cap.isOpened():
             x1,y1,x2,y2 = line[0]
             cv2.line(mask_copy,(x1,y1),(x2,y2),(255,0,0),3);
         cv2.imwrite(path+'\\step_photo\\mask_copy.png',mask_copy)
-        #cv2.imshow('mask',mask)
-        #plt.imshow(mask)
-        #plt.show()
 
         try :
            smooth_line = get_line(mask)
@@ -126,13 +122,9 @@ while cap.isOpened():
            cv2.fillConvexPoly(final_img, polygon, (0,230,0))
 
            frame_list.append(final_img)
-           #cv2.imwrite(path+'\\step_photo\\final.png',final_img)
-           #cv2.imshow('final_img',final_img)
         except :
            final_img = color_img.copy()
            frame_list.append(final_img)
-           #cv2.imwrite(path+'\\step_photo\\final.png',color_img)
-           #cv2.imshow('color_img',color_img)
     else :
            break
     
