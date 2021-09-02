@@ -1,6 +1,6 @@
 # Car_Road_Detect
 ## Description  
-To find the lines on the road, so write this program.
+To find the lines on the road, so I wrote this program.
 
 ## Tool
 Opencv
